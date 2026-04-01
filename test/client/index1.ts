@@ -4,7 +4,7 @@ const socket = await Bun.connect({
     socket: {
         open(socket){
             console.log('hi')
-            socket.write(JSON.stringify({name: "foo", key: ""}) + '\n')
+            socket.write(JSON.stringify({name: "foo", key: "foo"}) + '\n')
         },
         data(socket, buffer){
             console.log(buffer.toString('utf-8'))

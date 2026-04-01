@@ -3,7 +3,7 @@ const socket = await Bun.connect({
     port: 3000,
     socket: {
         open(socket) {
-            socket.write(JSON.stringify({ name: "bar", key: "" }) + '\n')
+            socket.write(JSON.stringify({ name: "bar", key: "bar" }) + '\n')
         },
         data(socket, buffer) {
             console.log(buffer.toString('utf-8'))

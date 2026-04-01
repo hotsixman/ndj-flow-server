@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 	"tcp-server/module/server"
 
 	"github.com/joho/godotenv"
@@ -14,19 +15,19 @@ func init() {
 	}
 }
 
-type TestChecker struct{}
-
-func (_ TestChecker) Check(name string, key string) bool {
-	return true
-}
-
 func main() {
-	checker := &TestChecker{}
-	app, err := server.CreateServer(":3000", checker)
+	checker, err := server.GetJSONKeyChecker()
+	if err != nil {
+		log.Fatal("Cannot read key.json")
+		return
+	}
+
+	app, err := server.CreateServer(os.Getenv("PORT"), checker)
 	if err != nil {
 		log.Fatal("Cannot create server: ", err)
 		return
 	}
+
 	app.Listen()
 	log.Println("Listening...")
 	select {}
