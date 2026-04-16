@@ -1,4 +1,4 @@
-name: Release GEEP
+name: Release
 
 on:
   push:
